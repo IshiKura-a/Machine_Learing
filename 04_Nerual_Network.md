@@ -9,7 +9,7 @@
 ## Model Representation
 
 神经网络算法的模型和人脑的神经元类似：
-![NN模型](img/3_1.png)
+![NN模型](img/4_1.png)
 一个简单的神经网络模型如上图所示，分为Input Layer（第一层）, Hidden Layer（中间所有层）, Output Layer（最后一层），一般来说每次层都会有一个bias unit（固定为1）
 我们用$a_i^{(j)}$来表示第$j$层的第$i$个单元，用$\Theta^{(j)}$表示控制第$j$层到第$j+1$层的参数矩阵，用$g(x)$表示我们的激活函数（Sigmoid function）于是在上图的模型中，我们有如下等式：
 $$
@@ -44,7 +44,7 @@ $$
 首先我们需要实现一个AND函数：
 
 <div align=center>
-	<img src="img/3_2.png">
+	<img src="img/4_2.png">
 </div>
 
 我们的权重矩阵可以设为：
@@ -88,7 +88,7 @@ $x_1$|$x_2$|$h_\Theta(x)$
 如果我们需要实现XNOR的话，注意到$x_1\odot{x_2}=(x_1\wedge{x_2})\vee(\overline{x}_1\wedge\overline{x}_2))$，在这里我们可以使用多层神经网络，先分别实现$x_1\wedge{x_2}$和$\overline{x}_1\wedge\overline{x}_2$，再用or进行组合：
 
 <div align=center>
-    <img src="img/3_3.svg">
+    <img src="img/4_3.svg">
 </div>
 
 真值表如下：
@@ -104,7 +104,7 @@ $x_1$|$x_2$|$a_1^{(2)}$|$a_2^{(2)}$|$h_\Theta(x)$
 
 和在logistic regression中介绍的类似，在神经网络中，我们可以使用这样的方法解决多分类问题。
 假设我们要处理一个四分类的问题，在之前我们会把$y$赋值为1,2,3,4表示四种不同的类别，在神经网络中，我们更倾向于用向量$(1,0,0,0)^T,$$(0,1,0,0)^T,...,(0,0,0,1)^T$来表示四种分类，也就是说，我们的输出层存在四个输出：
-![MC](img/3_4.png)
+![MC](img/4_4.png)
 
 ---
 
