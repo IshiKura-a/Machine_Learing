@@ -222,12 +222,12 @@ $$
     \right.
 $$
 问题中的$x_i^Tx_j$我们可以理解为两个向量的内积，那么经过我们的映射，这就会变成$\phi(x_i)^T\phi(x_j)$，问题在于映射之后得到的$\phi(x)$维数很高甚至是无限维的，我们在得到$\phi(x)$的基础上还要计算内积，计算量难以接受，这时候就有一个想法，我们能否找到一个函数$\mathcal{K}(x,x')$它的值就是$\phi(x)^T\phi(x')$？
-从这一点出发，我们可以引出核函数(Kernel Function)的定义：
+从这一点出发，我们可以引出正定核函数(Kernel Function)的定义：
 $$
     \forall{x},x'\in\mathcal{X},\exist\phi:\mathcal{X}\mapsto\mathcal{Z},\phi\in\mathcal{H},s.t.\space{\mathcal{K}}(x,x')=\phi(x)^T\phi(x')
 $$
 这里的$\mathcal{H}$指的是$Hilbert\space{space}$，它是完备的、可能是无限维的、被赋予内积的线性空间。
-这样的核函数又叫正定核函数，它满足如下两条性质：
+它也可以被如下两条性质定义：
 $$
     \begin{aligned}
         &symmetric:\space\mathcal{K}(x,z)=\mathcal{K}(z,x) \\
