@@ -40,16 +40,16 @@ $$
 
 ## 参数估计
 
-​	我们用$X$表示$N$组观测数据$(x_1,x_2,\cdots,x_N)$，把$(X,Z)$称为完整数据(Complete data)， 用$\Theta$表示参数，$\Theta=\{p_1,p_2,\cdots,p_k,\mu_1,\mu_2,\cdots,\mu_K,\Sigma_1,\Sigma_2,\cdots,\Sigma_K\}$，因此$\Theta$的极大似然估计为：
+​	我们用$X$表示$N$组观测数据$(x^{(1)},x^{(2)},\cdots,x^{(N)})$，把$(X,Z)$称为完整数据(Complete data)， 用$\Theta$表示参数，$\Theta=\{p_1,p_2,\cdots,p_k,\mu_1,\mu_2,\cdots,\mu_K,\Sigma_1,\Sigma_2,\cdots,\Sigma_K\}$，因此$\Theta$的极大似然估计为：
 $$
 \hat{\Theta}_{MLE}=\text{argmax}_\Theta\log{p(X)}
 $$
 ​	由于样本之间相互独立，所以
 $$
 \begin{aligned}
-	\hat{\Theta}_{MLE}&=\text{argmax}_\Theta\log\prod_{i=1}^Np(x_i) \\
-	&=\text{argmax}_\Theta\sum_{i=1}^N\log{p(x_i)} \\
-	&=\text{argmax}_\Theta\sum_{i=1}^N\log(\sum_{k=1}^Kp_k\cdot{N(x_i|\mu_k,\Sigma_k)}) \\
+	\hat{\Theta}_{MLE}&=\text{argmax}_\Theta\log\prod_{i=1}^Np(x^{(i)}) \\
+	&=\text{argmax}_\Theta\sum_{i=1}^N\log{p(x^{(i)})} \\
+	&=\text{argmax}_\Theta\sum_{i=1}^N\log(\sum_{k=1}^Kp_k\cdot{N(x^{(i)}|\mu_k,\Sigma_k)}) \\
 	
 \end{aligned}
 $$
@@ -57,35 +57,35 @@ $$
 $$
 \begin{aligned}
 	Q(\theta,\theta^{(t)})&=\int_z\log{p(X,Z|\theta)\cdot{p}(Z|X,\theta^{(t)})}dZ \\
-	&=\sum_{z_1,z_2,\cdots,z_N}{\log\prod_{i=1}^Np(x_i,z_i|\theta)}\cdot\prod_{i=1}^Np(z_i|x_i,\theta^{(t)}) \\
-	&=\sum_{z_1,z_2,\cdots,z_N}{\sum_{i=1}^N\log{}p(x_i,z_i|\theta)}\cdot\prod_{i=1}^Np(z_i|x_i,\theta^{(t)})
+	&=\sum_{z^{(1)},z^{(2)},\cdots,z^{(N)}}{\log\prod_{i=1}^Np(x^{(i)},z^{(i)}|\theta)}\cdot\prod_{i=1}^Np(z^{(i)}|x^{(i)},\theta^{(t)}) \\
+	&=\sum_{z^{(1)},z^{(2)},\cdots,z^{(N)}}{\sum_{i=1}^N\log{}p(x^{(i)},z^{(i)}|\theta)}\cdot\prod_{i=1}^Np(z^{(i)}|x^{(i)},\theta^{(t)})
 \end{aligned}
 $$
 ​	单独考虑一项，有
 $$
 \begin{aligned}
-	&\sum_{z_1,z_2,\cdots,z_N}\log{}p(x_1,z_1|\theta)\cdot\prod_{i=1}^Np(z_i|x_i,\theta^{(t)}) \\
-	=&\sum_{z_1,z_2,\cdots,z_N}\log{}p(x_1,z_1|\theta)\cdot{p}(z_1|x_1,\theta^{(t)})\prod_{i=2}^Np(z_i|x_i,\theta^{(t)}) \\
-	=&\sum_{z_1}\log{}p(x_1,z_1|\theta)\cdot{p}(z_1|x_1,\theta^{(t)})\cdot\sum_{z_2,\cdots,z_N}\prod_{i=2}^Np(z_i|x_i,\theta^{(t)}) \\
-	=&\sum_{z_1}\log{}p(x_1,z_1|\theta)\cdot{p}(z_1|x_1,\theta^{(t)})\cdot\prod_{i=2}^N\sum_{z_i}p(z_i|x_i,\theta^{(t)}) \\
-	=&\sum_{z_1}\log{}p(x_1,z_1|\theta)\cdot{p}(z_1|x_1,\theta^{(t)})\cdot\prod_{i=2}^N1 \\
-	=&\sum_{z_1}\log{}p(x_1,z_1|\theta)\cdot{p}(z_1|x_1,\theta^{(t)}) \\
+	&\sum_{z^{(1)},z^{(2)},\cdots,z^{(N)}}\log{}p(x^{(1)},z^{(1)}|\theta)\cdot\prod_{i=1}^Np(z^{(i)}|x^{(i)},\theta^{(t)}) \\
+	=&\sum_{z^{(1)},z^{(2)},\cdots,z^{(N)}}\log{}p(x^{(1)},z^{(1)}|\theta)\cdot{p}(z^{(1)}|x^{(1)},\theta^{(t)})\prod_{i=2}^Np(z^{(i)}|x^{(i)},\theta^{(t)}) \\
+	=&\sum_{z_1}\log{}p(x^{(1)},z_1|\theta)\cdot{p}(z^{(1)}|x^{(1)},\theta^{(t)})\cdot\sum_{z_2,\cdots,z_N}\prod_{i=2}^Np(z^{(i)}|x^{(i)},\theta^{(t)}) \\
+	=&\sum_{z^{(1)}}\log{}p(x^{(1)},z^{(1)}|\theta)\cdot{p}(z^{(1)}|x^{(1)},\theta^{(t)})\cdot\prod_{i=2}^N\sum_{z_i}p(z^{(i)}|x^{(i)},\theta^{(t)}) \\
+	=&\sum_{z^{(1)}}\log{}p(x^{(1)},z^{(1)}|\theta)\cdot{p}(z^{(1)}|x^{(1)},\theta^{(t)})\cdot\prod_{i=2}^N1 \\
+	=&\sum_{z^{(1)}}\log{}p(x^{(1)},z^{(1)}|\theta)\cdot{p}(z^{(1)}|x^{(1)},\theta^{(t)}) \\
 \end{aligned}
 $$
 ​	因此，
 $$
 \begin{aligned}
-	Q(\theta,\theta^{(t)})&=\sum_{i=1}^N\sum_{z_i}\log{p(x_i,z_i|\theta)}\cdot{p(z_i|x_i,\theta^{(t)})} \\
-	&=\sum_{i=1}^N\sum_{z_i}\log({p_{z_i}}\cdot{N(x_i|\mu_{z_i},\Sigma_{z_i})})\cdot{\dfrac{{p_{z_i}^{(t)}}\cdot{N(x_i|\mu_{z_i}^{(t)},\Sigma_{z_i}^{(t)})}}{\sum_{k=1}^Kp_k^{(t)}N(x_i|\mu_k^{(t)},\Sigma_k^{(t)})}} \\
-	&=\sum_{z_i}\sum_{i=1}^N\log({p_{z_i}}\cdot{N(x_i|\mu_{z_i},\Sigma_{z_i})})\cdot {p(z_i|x_i,\theta^{(t)})} \\
-	&=\sum_{k=1}^K\sum_{i=1}^N\log({p_{k}}\cdot{N(x_i|\mu_{k},\Sigma_{k})})\cdot {p(z_i=c_k|x_i,\theta^{(t)})} \\
-	&=\sum_{k=1}^K\sum_{i=1}^N(\log{p_{k}}+\log{N(x_i|\mu_{k},\Sigma_{k})})\cdot {p(z_i=c_k|x_i,\theta^{(t)})}
+	Q(\theta,\theta^{(t)})&=\sum_{i=1}^N\sum_{z^{(i)}}\log{p(x^{(i)},z^{(i)}|\theta)}\cdot{p(z^{(i)}|x^{(i)},\theta^{(t)})} \\
+	&=\sum_{i=1}^N\sum_{z^{(i)}}\log({p_{z^{(i)}}}\cdot{N(x^{(i)}|\mu_{z^{(i)}},\Sigma_{z^{(i)}})})\cdot{\dfrac{{p_{z^{(i)}}^{(t)}}\cdot{N(x^{(i)}|\mu_{z^{(i)}}^{(t)},\Sigma_{z^{(i)}}^{(t)})}}{\sum_{k=1}^Kp_k^{(t)}N(x^{(i)}|\mu_k^{(t)},\Sigma_k^{(t)})}} \\
+	&=\sum_{z_i}\sum_{i=1}^N\log({p_{z^{(i)}}}\cdot{N(x_i|\mu_{z^{(i)}},\Sigma_{z^{(i)}})})\cdot {p(z^{(i)}|x_i,\theta^{(t)})} \\
+	&=\sum_{k=1}^K\sum_{i=1}^N\log({p_{k}}\cdot{N(x^{(i)}|\mu_{k},\Sigma_{k})})\cdot {p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})} \\
+	&=\sum_{k=1}^K\sum_{i=1}^N(\log{p_{k}}+\log{N(x^{(i)}|\mu_{k},\Sigma_{k})})\cdot {p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})}
 \end{aligned}
 $$
 ​	接下来求解$p^{(t+1)}=(p_1^{(t+1)},p_2^{(t+1)},\cdots,p_K^{(t+1)})$
 $$
 \begin{aligned}
-	p_k^{(t+1)}&=\text{argmax}_{p_k}\sum_{k=1}^K\sum_{i=1}^N\log{p_{k}}\cdot {p(z_i=c_k|x_i,\theta^{(t)})}
+	p_k^{(t+1)}&=\text{argmax}_{p_k}\sum_{k=1}^K\sum_{i=1}^N\log{p_{k}}\cdot {p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})}
 \end{aligned}
 $$
 ​	因为存在约束
@@ -94,19 +94,19 @@ $$
 $$
 ​	所以，我们使用拉格朗日乘子法来求解。定义
 $$
-\mathcal{L}(p,\lambda)=\sum_{k=1}^K\sum_{i=1}^N\log{p_{k}}\cdot {p(z_i=c_k|x_i,\theta^{(t)})}+\lambda(\sum_{k=1}^Kp_k-1)
+\mathcal{L}(p,\lambda)=\sum_{k=1}^K\sum_{i=1}^N\log{p_{k}}\cdot {p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})}+\lambda(\sum_{k=1}^Kp_k-1)
 $$
 ​	对$p_k$求偏导
 $$
-\dfrac{\partial\mathcal{L}}{\partial{p_k}}=\sum_{i=1}^N\frac{1}{p_k}\cdot{p(z_i=c_k|x_i,\theta^{(t)})}+\lambda
+\dfrac{\partial\mathcal{L}}{\partial{p_k}}=\sum_{i=1}^N\frac{1}{p_k}\cdot{p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})}+\lambda
 $$
 ​	令其为0，则
 $$
-\sum_{i=1}^N{p(z_i=c_k|x_i,\theta^{(t)})}+p_k\lambda=0
+\sum_{i=1}^N{p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})}+p_k\lambda=0
 $$
 ​	对$k$进行求和，有
 $$
-\sum_{i=1}^N\sum_{k=1}^K{p(z_i=c_k|x_i,\theta^{(t)})}+\sum_{k=1}^Kp_k\lambda=0
+\sum_{i=1}^N\sum_{k=1}^K{p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})}+\sum_{k=1}^Kp_k\lambda=0
 $$
 ​	因为$p(z_i|x_i,\theta^{(t)})$是概率密度函数，所以
 $$
@@ -114,6 +114,6 @@ $$
 $$
 ​	因此，
 $$
-p_k^{(t+1)}=\frac{1}{N}\sum_{i=1}^N{p(z_i=c_k|x_i,\theta^{(t)})}
+p_k^{(t+1)}=\frac{1}{N}\sum_{i=1}^N{p(z^{(i)}=c_k|x^{(i)},\theta^{(t)})}
 $$
 ​	
